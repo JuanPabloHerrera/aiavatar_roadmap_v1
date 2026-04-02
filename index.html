@@ -207,17 +207,6 @@ footer strong{color:var(--text-2);font-weight:500;}
 .cpl-bajo{background:var(--green-bg);color:var(--green);border-color:var(--green-bd);}
 .f-rev{background:var(--blue-bg);color:var(--blue-text);border-color:var(--blue-bd);}
 .f-rev .fd{background:var(--blue-text);}
-.profiles-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;}
-.mc-wide{}
-.prof-rows{display:flex;flex-direction:column;gap:7px;margin-top:8px;}
-.prof-row{display:flex;align-items:center;gap:8px;}
-.prof-name{font-size:11px;font-weight:500;color:var(--text-2);letter-spacing:-0.1px;min-width:160px;white-space:nowrap;}
-.prof-bar-wrap{flex:1;height:4px;border-radius:2px;background:var(--bg);overflow:hidden;}
-.prof-bar{height:4px;border-radius:2px;}
-.su-bar{background:var(--accent);}
-.nu-bar{background:var(--green);}
-.prof-hrs{font-size:11px;font-weight:600;color:var(--text-2);min-width:44px;text-align:right;letter-spacing:-0.2px;}
-@media(max-width:720px){.profiles-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -268,7 +257,7 @@ footer strong{color:var(--text-2);font-weight:500;}
     <div class="li"><div class="ld" style="background:var(--green)"></div>Sí — resuelto</div>
     <div class="li"><div class="ld" style="background:var(--blue-text)"></div>Sí, con revisión</div>
     <div class="li"><div class="ld" style="background:#f59e0b"></div>Parcial — con limitaciones</div>
-    <div class="li"><div class="ld" style="background:var(--blue-text)"></div>Sí, con revisión — incluido con ajustes</div>
+    <div class="li"><div class="ld" style="background:var(--red)"></div>No — fuera de alcance actual</div>
   </div>
 
   <div class="table-card">
@@ -296,8 +285,8 @@ const DATA=[
   {id:7,  no:14, cat:"IA / Prompt",               t:"Ajustar prompt del mentor para feedback menos condescendiente y más equilibrado",                                p:"CRITICA",su:{v:"Sí",      a:"Ingeniero AI/ML Senior",                                e:"10 hrs"}, nu:{v:"Sí",      a:"Ingeniero AI/ML Senior",           e:"60 hrs"},c:"Bajo",c:"Bajo"},
   {id:8,  no:15, cat:"IA / Voz",                  t:"Ajustar acento del mentor a neutro según proyecto y usuario",                                                    p:"CRITICA",su:{v:"Sí, con revisión", a:"Desarrollador Senior Backend · Ingeniero AI/ML Senior",    e:"40 hrs"},  nu:{v:"Sí",      a:"Desarrollador Senior Backend · Ingeniero AI/ML Senior",                     e:"40 hrs"},c:"Bajo",c:"Bajo"},
   {id:9,  no:17, cat:"Nueva funcionalidad",       t:"Auto guardado de sesión para retomar si hay desconexión de internet",                                            p:"CRITICA",su:{v:"Sí, con revisión", a:"Desarrollador Senior Backend · Desarrollador Senior Unity/WebGL · Desarrollador Senior Frontend",                e:"180 hrs"},  nu:{v:"Sí",      a:"Desarrollador Senior Backend · Desarrollador Senior Frontend",               e:"90 hrs"},c:"Alto",c:"Alto"},
-  {id:10, no:22, cat:"Nueva funcionalidad",       t:"Recordatorio inteligente: ver disponibilidad en agenda y sugerir sesiones al usuario",                           p:"CRITICA",su:{v:"Sí, con revisión",      a:"Desarrollador Senior Backend · Desarrollador Senior Frontend · Ingeniero DevOps/Cloud",     e:"108 hrs"},  nu:{v:"Sí",      a:"Desarrollador Senior Backend · Desarrollador Senior Frontend",               e:"64 hrs"},c:"Medio",c:"Medio"},
-  {id:11, no:28, cat:"Nueva funcionalidad",       t:"Niveles de casos adaptivos tipo Duolingo: repetir si el resultado no fue satisfactorio",                         p:"CRITICA",su:{v:"Sí, con revisión",      a:"Desarrollador Senior Backend · Desarrollador Senior Frontend · Diseñador UX/UI Senior · QA Engineer Senior",          e:"144 hrs"},  nu:{v:"Sí",      a:"Desarrollador Senior Backend · Desarrollador Senior Frontend · Diseñador UX/UI Senior · QA Engineer Senior",                 e:"120 hrs"},c:"Medio",c:"Medio"},
+  {id:10, no:22, cat:"Nueva funcionalidad",       t:"Recordatorio inteligente: ver disponibilidad en agenda y sugerir sesiones al usuario",                           p:"CRITICA",su:{v:"No",      a:"Desarrollador Senior Backend · Desarrollador Senior Frontend · Ingeniero DevOps/Cloud",     e:"108 hrs"},  nu:{v:"Sí",      a:"Desarrollador Senior Backend · Desarrollador Senior Frontend",               e:"64 hrs"},c:"Medio",c:"Medio"},
+  {id:11, no:28, cat:"Nueva funcionalidad",       t:"Niveles de casos adaptivos tipo Duolingo: repetir si el resultado no fue satisfactorio",                         p:"CRITICA",su:{v:"No",      a:"Desarrollador Senior Backend · Desarrollador Senior Frontend · Diseñador UX/UI Senior · QA Engineer Senior",          e:"144 hrs"},  nu:{v:"Sí",      a:"Desarrollador Senior Backend · Desarrollador Senior Frontend · Diseñador UX/UI Senior · QA Engineer Senior",                 e:"120 hrs"},c:"Medio",c:"Medio"},
   {id:12, no:29, cat:"Nueva funcionalidad",       t:"Sistema para que participantes evalúen la plataforma (reviews y rating)",                                        p:"CRITICA",su:{v:"Sí, con revisión", a:"Desarrollador Senior Fullstack · Diseñador UX/UI Senior",                 e:"40 hrs"},  nu:{v:"Sí",      a:"Desarrollador Senior Backend · Diseñador UX/UI Senior",                   e:"40 hrs"},c:"Bajo",c:"Bajo"},
   {id:13, no:30, cat:"Nueva funcionalidad",       t:"Avatar que solo escuche al participante, no al ruido de fondo",                                                  p:"CRITICA",su:{v:"Sí, con revisión", a:"Desarrollador Senior Backend · Desarrollador Senior Unity/WebGL · QA Engineer Senior",                e:"76 hrs"},  nu:{v:"Sí",      a:"Desarrollador Senior Backend · QA Engineer Senior",                   e:"56 hrs"},c:"Alto",c:"Alto"},
   {id:14, no:31, cat:"Prueba / Infraestructura",  t:"Load test de la plataforma bajo carga real de usuarios simultáneos",                                             p:"CRITICA",su:{v:"Sí, con revisión", a:"Ingeniero DevOps/Cloud · QA Engineer Senior",             e:"140 hrs"},  nu:{v:"Sí",      a:"QA Engineer Senior",             e:"40 hrs"},c:"Medio",c:"Medio"},
@@ -314,9 +303,9 @@ const DATA=[
   {id:25, no:10, cat:"UX / Diseño",               t:"Mejorar diseño visual para que se perciba más premium y menos plano",                                            p:"MEDIA",  su:{v:"Sí, con revisión", a:"Diseñador UX/UI Senior · Desarrollador Senior Frontend",                      e:"140 hrs"},  nu:{v:"Sí",      a:"Diseñador UX/UI Senior · Desarrollador Senior Frontend",                   e:"120 hrs"},c:"Alto",c:"Alto"},
   {id:26, no:11, cat:"Nueva funcionalidad",       t:"Sección para subir recursos del cliente (PDFs, manuales, infografías) por proyecto",                            p:"MEDIA",  su:{v:"Sí, con revisión", a:"Desarrollador Senior Backend · Desarrollador Senior Frontend",e:"60 hrs"},  nu:{v:"Sí",      a:"Desarrollador Senior Backend · Desarrollador Senior Frontend",     e:"48 hrs"},c:"Bajo",c:"Bajo"},
   {id:27, no:27, cat:"Nueva funcionalidad",       t:"Animaciones idle del avatar cuando no está hablando",                                                            p:"MEDIA",  su:{v:"Sí, con revisión", a:"Desarrollador Senior Unity/WebGL · Diseñador 3D Senior",        e:"60 hrs"},  nu:{v:"Sí",      a:"Ingeniero AI/ML Senior",               e:"16 hrs"},c:"Medio",c:"Medio"},
-  {id:28, no:9,  cat:"UX / Diseño",               t:"Evolucionar diseño físico de avatares (actualmente desactualizados)",                                            p:"BAJA",   su:{v:"Sí, con revisión",      a:"Diseñador 3D Senior · Desarrollador Senior Unity/WebGL",   e:"240 hrs"}, nu:{v:"Sí",      a:"Diseñador UX/UI Senior · Ingeniero AI/ML Senior",      e:"80 hrs"},c:"Alto",c:"Alto"},
-  {id:29, no:18, cat:"Analítica / IA",            t:"Módulo de IA que analice el estado de cada proyecto con indicadores clave",                                      p:"BAJA",   su:{v:"Sí, con revisión",      a:"Ingeniero AI/ML Senior · Desarrollador Senior Backend · Desarrollador Senior Frontend · Ingeniero DevOps/Cloud · QA Engineer Senior",   e:"138 hrs"}, nu:{v:"Sí",      a:"Ingeniero AI/ML Senior · Desarrollador Senior Backend · Desarrollador Senior Frontend · QA Engineer Senior",             e:"108 hrs"},c:"Alto",c:"Alto"},
-  {id:30, no:21, cat:"Nueva funcionalidad",       t:"Avatar bot con IA para resolver dudas o problemas inmediatos dentro de la plataforma",                          p:"BAJA",   su:{v:"Sí, con revisión",      a:"Ingeniero AI/ML Senior · Desarrollador Senior Frontend · Desarrollador Senior Backend · QA Engineer Senior",       e:"86 hrs"},  nu:{v:"Sí",      a:"Ingeniero AI/ML Senior · Desarrollador Senior Frontend · Desarrollador Senior Backend · QA Engineer Senior",              e:"76 hrs"},c:"Medio",c:"Medio"}
+  {id:28, no:9,  cat:"UX / Diseño",               t:"Evolucionar diseño físico de avatares (actualmente desactualizados)",                                            p:"BAJA",   su:{v:"No",      a:"Diseñador 3D Senior · Desarrollador Senior Unity/WebGL",   e:"240 hrs"}, nu:{v:"Sí",      a:"Diseñador UX/UI Senior · Ingeniero AI/ML Senior",      e:"80 hrs"},c:"Alto",c:"Alto"},
+  {id:29, no:18, cat:"Analítica / IA",            t:"Módulo de IA que analice el estado de cada proyecto con indicadores clave",                                      p:"BAJA",   su:{v:"No",      a:"Ingeniero AI/ML Senior · Desarrollador Senior Backend · Desarrollador Senior Frontend · Ingeniero DevOps/Cloud · QA Engineer Senior",   e:"138 hrs"}, nu:{v:"Sí",      a:"Ingeniero AI/ML Senior · Desarrollador Senior Backend · Desarrollador Senior Frontend · QA Engineer Senior",             e:"108 hrs"},c:"Alto",c:"Alto"},
+  {id:30, no:21, cat:"Nueva funcionalidad",       t:"Avatar bot con IA para resolver dudas o problemas inmediatos dentro de la plataforma",                          p:"BAJA",   su:{v:"No",      a:"Ingeniero AI/ML Senior · Desarrollador Senior Frontend · Desarrollador Senior Backend · QA Engineer Senior",       e:"86 hrs"},  nu:{v:"Sí",      a:"Ingeniero AI/ML Senior · Desarrollador Senior Frontend · Desarrollador Senior Backend · QA Engineer Senior",              e:"76 hrs"},c:"Medio",c:"Medio"}
 ];
 
 let F={p:'TODAS',c:'TODAS'}, openId=null;
@@ -337,15 +326,17 @@ function pdi(v){return v==='Sí'?'✓':v==='Sí, con revisión'?'✓':'✗';}
 function parseWeeks(s){
   s=(s||'').trim();
   if(!s||s==='Listo'||s==='Incluido') return 0;
-  if(s.includes('hrs')){return parseFloat(s)||0;}
   if(s.includes('días')){const p=s.replace(' días','').split('–');const d=p.length===2?(+p[0]+ +p[1])/2:+p[0];return d/5;}
   const p=s.replace(' sem','').split('–');
   return p.length===2?(+p[0]+ +p[1])/2:+p[0];
 }
-function fmtTime(hrs){
-  if(hrs<=0) return {hrs:0, label:'Listo', disp:'0 hrs'};
-  const h=Math.round(hrs);
-  return {hrs:h, label:h+' hrs', disp:h+' hrs'};
+function fmtTime(weeks){
+  if(weeks<=0) return {weeks:0, months:'< 1 mes', label:'Listo'};
+  const w=weeks<1 ? Math.round(weeks*10)/10 : Math.round(weeks);
+  const wLabel=w<1?'< 1':String(w);
+  const m=weeks/4;
+  const ml=m<0.5?'< 1 mes':m<1?'~1 mes':m<2?'~'+Math.round(m*2)/2+' meses':'~'+Math.round(m)+' meses';
+  return {weeks:w, months:ml, label:wLabel+' sem · '+ml};
 }
 function renderM(d){
   const n=d.length||1,total=d.length;
@@ -356,8 +347,8 @@ function renderM(d){
   const cA=d.filter(i=>i.c==='Alto').length;
   const cM=d.filter(i=>i.c==='Medio').length;
   const cB=d.filter(i=>i.c==='Bajo').length;
-  const suH=d.reduce((a,i)=>a+parseWeeks(i.su.e),0);
-  const nuH=d.reduce((a,i)=>a+parseWeeks(i.nu.e),0);
+  const suH=Math.round(d.reduce((a,i)=>a+parseWeeks(i.su.e),0));
+  const nuH=Math.round(d.reduce((a,i)=>a+parseWeeks(i.nu.e),0));
   function bar(v,t,col){const p=t?Math.round(v/t*100):0;return '<div class="via-bar-wrap"><div class="via-bar" style="width:'+p+'%;background:'+col+'"></div></div>';}
   document.getElementById('metrics-grid').innerHTML=
     '<div class="mc"><div class="mc-label">Tareas por prioridad</div><div class="via-rows">'+
@@ -372,20 +363,20 @@ function renderM(d){
       '<div class="via-row"><div class="via-dot" style="background:var(--green)"></div><span class="via-name">Baja</span>'+bar(cB,total,'var(--green)')+'<span class="via-count" style="color:var(--green)">'+cB+'</span></div>'+
     '</div></div>'+
     '<div class="mc"><div class="mc-label">Horas — Desarrollo actual</div>'+
-      '<div class="mc-time-main su-col">'+Math.round(suH)+' <span style="font-size:16px;font-weight:500;color:var(--text-3)">hrs</span></div>'+
+      '<div class="mc-time-main su-col">'+suH+' <span style="font-size:16px;font-weight:500;color:var(--text-3)">hrs</span></div>'+
       '<div class="mc-time-sub">horas de trabajo efectivo</div>'+
       '<span class="mc-time-badge su-badge">'+total+' requerimientos</span>'+
     '</div>'+
     '<div class="mc"><div class="mc-label">Horas — Desarrollo Mappli</div>'+
-      '<div class="mc-time-main nu-col">'+Math.round(nuH)+' <span style="font-size:16px;font-weight:500;color:var(--text-3)">hrs</span></div>'+
+      '<div class="mc-time-main nu-col">'+nuH+' <span style="font-size:16px;font-weight:500;color:var(--text-3)">hrs</span></div>'+
       '<div class="mc-time-sub">horas de trabajo efectivo</div>'+
       '<span class="mc-time-badge nu-badge">'+total+' tareas cubiertas</span>'+
     '</div>';
   document.getElementById('profiles-grid').innerHTML=
-    '<div class="mc mc-wide"><div class="mc-label">Perfiles — Desarrollo actual <span class="mc-time-badge su-badge">2638 hrs totales</span></div>'+
+    '<div class="mc"><div class="mc-label">Perfiles — Desarrollo actual <span class="mc-time-badge su-badge">2638 hrs totales</span></div>'+
       '<div class="prof-rows"><div class="prof-row"><span class="prof-name">Dev Sr Backend</span><div class="prof-bar-wrap"><div class="prof-bar su-bar" style="width:23%"></div></div><span class="prof-hrs">606 hrs</span></div><div class="prof-row"><span class="prof-name">Dev Sr Frontend</span><div class="prof-bar-wrap"><div class="prof-bar su-bar" style="width:16%"></div></div><span class="prof-hrs">416 hrs</span></div><div class="prof-row"><span class="prof-name">Dev Sr Unity/WebGL</span><div class="prof-bar-wrap"><div class="prof-bar su-bar" style="width:10%"></div></div><span class="prof-hrs">272 hrs</span></div><div class="prof-row"><span class="prof-name">QA Engineer Sr</span><div class="prof-bar-wrap"><div class="prof-bar su-bar" style="width:10%"></div></div><span class="prof-hrs">262 hrs</span></div><div class="prof-row"><span class="prof-name">DevOps/Cloud Engineer</span><div class="prof-bar-wrap"><div class="prof-bar su-bar" style="width:7%"></div></div><span class="prof-hrs">192 hrs</span></div><div class="prof-row"><span class="prof-name">AI/ML Engineer Sr</span><div class="prof-bar-wrap"><div class="prof-bar su-bar" style="width:7%"></div></div><span class="prof-hrs">172 hrs</span></div><div class="prof-row"><span class="prof-name">Dev Sr Fullstack</span><div class="prof-bar-wrap"><div class="prof-bar su-bar" style="width:5%"></div></div><span class="prof-hrs">130 hrs</span></div><div class="prof-row"><span class="prof-name">Diseñador 3D Sr</span><div class="prof-bar-wrap"><div class="prof-bar su-bar" style="width:8%"></div></div><span class="prof-hrs">200 hrs</span></div><div class="prof-row"><span class="prof-name">UX/UI Designer Sr</span><div class="prof-bar-wrap"><div class="prof-bar su-bar" style="width:5%"></div></div><span class="prof-hrs">124 hrs</span></div><div class="prof-row"><span class="prof-name">Arquitecto de Software</span><div class="prof-bar-wrap"><div class="prof-bar su-bar" style="width:5%"></div></div><span class="prof-hrs">120 hrs</span></div><div class="prof-row"><span class="prof-name">PM / Tech Lead</span><div class="prof-bar-wrap"><div class="prof-bar su-bar" style="width:5%"></div></div><span class="prof-hrs">144 hrs</span></div></div>'+
     '</div>'+
-    '<div class="mc mc-wide"><div class="mc-label">Perfiles — Desarrollo Mappli <span class="mc-time-badge nu-badge">1596 hrs totales</span></div>'+
+    '<div class="mc"><div class="mc-label">Perfiles — Desarrollo Mappli <span class="mc-time-badge nu-badge">1596 hrs totales</span></div>'+
       '<div class="prof-rows"><div class="prof-row"><span class="prof-name">Dev Sr Backend</span><div class="prof-bar-wrap"><div class="prof-bar nu-bar" style="width:36%"></div></div><span class="prof-hrs">570 hrs</span></div><div class="prof-row"><span class="prof-name">AI/ML Engineer Sr</span><div class="prof-bar-wrap"><div class="prof-bar nu-bar" style="width:16%"></div></div><span class="prof-hrs">252 hrs</span></div><div class="prof-row"><span class="prof-name">Dev Sr Frontend</span><div class="prof-bar-wrap"><div class="prof-bar nu-bar" style="width:14%"></div></div><span class="prof-hrs">218 hrs</span></div><div class="prof-row"><span class="prof-name">QA Engineer Sr</span><div class="prof-bar-wrap"><div class="prof-bar nu-bar" style="width:11%"></div></div><span class="prof-hrs">180 hrs</span></div><div class="prof-row"><span class="prof-name">UX/UI Designer Sr</span><div class="prof-bar-wrap"><div class="prof-bar nu-bar" style="width:9%"></div></div><span class="prof-hrs">148 hrs</span></div><div class="prof-row"><span class="prof-name">Arquitecto de Software</span><div class="prof-bar-wrap"><div class="prof-bar nu-bar" style="width:8%"></div></div><span class="prof-hrs">120 hrs</span></div><div class="prof-row"><span class="prof-name">PM / Tech Lead</span><div class="prof-bar-wrap"><div class="prof-bar nu-bar" style="width:7%"></div></div><span class="prof-hrs">108 hrs</span></div></div>'+
     '</div>';
 }
