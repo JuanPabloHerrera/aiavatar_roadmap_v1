@@ -322,8 +322,8 @@ let F={p:'TODAS',c:'TODAS'}, openId=null;
 const CV=`<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>`;
 
 function fp(v,e){
-  const c=v==='Sí'?'f-si':v==='Parcial'?'f-parcial':'f-no';
-  const l=v==='Sí'?'Sí':v==='Parcial'?'Parcial':'No aplica';
+  const c=v==='Sí'?'f-si':v==='Parcial'?'f-parcial':'f-rev';
+  const l=v==='Sí'?'Sí':v==='Parcial'?'Parcial':'Si, con revisión';
   return `<div class="fw"><span class="fp ${c}"><span class="fd"></span>${l}</span><span class="ft">${e}</span></div>`;
 }
 function bdg(p){
