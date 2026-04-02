@@ -93,14 +93,14 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.85);backdrop
 
 /* TABLE CARD */
 .table-card{background:var(--surface);border-radius:var(--r-xl);box-shadow:var(--sh-sm);overflow:hidden;margin-bottom:32px;}
-.table-head{display:grid;grid-template-columns:1fr 96px 180px 180px;padding:11px 20px;border-bottom:1px solid var(--border);background:var(--surface-sub);}
+.table-head{display:grid;grid-template-columns:1fr 96px 100px 180px 180px;padding:11px 20px;border-bottom:1px solid var(--border);background:var(--surface-sub);}
 .th{font-size:11px;font-weight:600;color:var(--text-3);letter-spacing:0.05em;text-transform:uppercase;}
 .th.c{text-align:center;}
 
 /* ROWS */
 .row-wrap{border-bottom:1px solid var(--border);}
 .row-wrap:last-child{border-bottom:none;}
-.row{display:grid;grid-template-columns:1fr 96px 180px 180px;padding:15px 20px;cursor:pointer;transition:background var(--t);align-items:center;user-select:none;}
+.row{display:grid;grid-template-columns:1fr 96px 100px 180px 180px;padding:15px 20px;cursor:pointer;transition:background var(--t);align-items:center;user-select:none;}
 .row:hover{background:var(--surface-sub);}
 .row-num{font-size:11px;font-weight:500;color:var(--text-3);letter-spacing:-0.1px;margin-bottom:3px;}
 .row-title{font-size:13px;font-weight:500;color:var(--text-1);line-height:1.45;letter-spacing:-0.2px;display:flex;align-items:flex-start;gap:6px;}
@@ -202,6 +202,9 @@ footer strong{color:var(--text-2);font-weight:500;}
 .mc-time-badge.su-badge { background: var(--blue-bg); color: var(--blue-text); border-color: var(--blue-bd); }
 .mc-time-badge.nu-badge { background: var(--green-bg); color: var(--green); border-color: var(--green-bd); }
 /* Remove old mc-val, mc-sub, mc-time-row since they're replaced */
+.cpl-alto{background:var(--red-bg);color:var(--red);border-color:var(--red-bd);}
+.cpl-med{background:var(--amber-bg);color:var(--amber);border-color:var(--amber-bd);}
+.cpl-bajo{background:var(--green-bg);color:var(--green);border-color:var(--green-bd);}
 </style>
 </head>
 <body>
@@ -236,12 +239,12 @@ footer strong{color:var(--text-2);font-weight:500;}
         </div>
       </div>
       <div class="cg">
-        <span class="cl">Mappli resuelve</span>
+        <span class="cl">Complejidad</span>
         <div class="seg">
-          <button class="seg-btn active" data-filter="viabilidad" data-val="TODAS"   onclick="sf('viabilidad','TODAS',this)">Todas</button>
-          <button class="seg-btn"        data-filter="viabilidad" data-val="Sí"      onclick="sf('viabilidad','Sí',this)">Sí</button>
-          <button class="seg-btn"        data-filter="viabilidad" data-val="Parcial" onclick="sf('viabilidad','Parcial',this)">Parcial</button>
-          <button class="seg-btn"        data-filter="viabilidad" data-val="No"      onclick="sf('viabilidad','No',this)">No aplica</button>
+          <button class="seg-btn active" data-filter="complejidad" data-val="TODAS" onclick="sf('complejidad','TODAS',this)">Todas</button>
+          <button class="seg-btn"        data-filter="complejidad" data-val="Alto"  onclick="sf('complejidad','Alto',this)">Alta</button>
+          <button class="seg-btn"        data-filter="complejidad" data-val="Medio" onclick="sf('complejidad','Medio',this)">Media</button>
+          <button class="seg-btn"        data-filter="complejidad" data-val="Bajo"  onclick="sf('complejidad','Bajo',this)">Baja</button>
         </div>
       </div>
     </div>
@@ -257,6 +260,7 @@ footer strong{color:var(--text-2);font-weight:500;}
     <div class="table-head">
       <div class="th">Requerimiento</div>
       <div class="th c">Prioridad</div>
+      <div class="th c">Complejidad</div>
       <div class="th c">Desarrollo actual</div>
       <div class="th c">Desarrollo Mappli</div>
     </div>
@@ -300,7 +304,7 @@ const DATA=[
   {id:30, no:21, cat:"Nueva funcionalidad",       t:"Avatar bot con IA para resolver dudas o problemas inmediatos dentro de la plataforma",                          p:"BAJA",   su:{v:"No",      a:"Integrar OpenAI Assistants API con contexto de la plataforma · UI de chat flotante en Blazor integrado en todas las vistas · Base de conocimiento del producto como contexto del asistente · Escalamiento a soporte humano si el bot no resuelve",       e:"1–1.5 sem"},  nu:{v:"Sí",      a:"Se integra un agente conversacional accesible desde cualquier pantalla, capaz de responder preguntas sobre la plataforma, orientar al usuario en su progreso y resolver incidencias comunes de forma autónoma, con acceso al contexto del usuario para respuestas personalizadas y derivación automática al equipo humano cuando sea necesario",              e:"0.5 sem"},c:"Medio",c:"Medio"}
 ];
 
-let F={p:'TODAS',v:'TODAS'}, openId=null;
+let F={p:'TODAS',c:'TODAS'}, openId=null;
 const CV=`<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>`;
 
 function fp(v,e){
@@ -366,6 +370,7 @@ function renderM(d){
       '<span class="mc-time-badge nu-badge">'+total+' tareas cubiertas</span>'+
     '</div>';
 }
+function cplx(c){const m={'Alto':['cpl-alto','Alta'],'Medio':['cpl-med','Media'],'Bajo':['cpl-bajo','Baja']};const[cls,lbl]=m[c]||['cpl-bajo',c||''];return '<div class="bc"><span class="badge '+cls+'">'+lbl+'</span></div>';}
 function renderC(d){
   const c=document.getElementById('cards');
   if(!d.length){c.innerHTML='<div class="empty">Sin resultados para los filtros seleccionados.</div>';return;}
@@ -377,6 +382,7 @@ function renderC(d){
           <div class="row-title"><span class="chev">${CV}</span>${i.t}</div>
         </div>
         ${bdg(i.p)}
+        ${cplx(i.c)}
         ${fp(i.su.v,i.su.e)}
         ${fp(i.nu.v,i.nu.e)}
       </div>
@@ -409,7 +415,7 @@ function tog(id){
 }
 
 function sf(type,val,btn){
-  F[type==='prioridad'?'p':'v']=val;
+  if(type==='prioridad') F.p=val; else if(type==='complejidad') F.c=val;
   document.querySelectorAll(`[data-filter="${type}"]`).forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   run();
@@ -418,7 +424,7 @@ function sf(type,val,btn){
 function run(){
   let d=DATA;
   if(F.p!=='TODAS') d=d.filter(i=>i.p===F.p);
-  if(F.v!=='TODAS') d=d.filter(i=>i.nu.v===F.v);
+  if(F.c!=='TODAS') d=d.filter(i=>i.c===F.c);
   openId=null; renderM(d); renderC(d);
 }
 
