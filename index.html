@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparativo de Soluciones — Plan de Trabajo 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:           #f5f5f7;
+  --surface:      #ffffff;
+  --surface-sub:  #f5f5f7;
+  --text-1:       #1d1d1f;
+  --text-2:       #6e6e73;
+  --text-3:       #aeaeb2;
+  --border:       rgba(0,0,0,0.08);
+  --border-mid:   rgba(0,0,0,0.12);
+  --accent:       #0071e3;
+  --accent-bg:    #e8f1fd;
+  --green:        #1c8a4e;
+  --green-bg:     #f0faf4;
+  --green-bd:     #bbf7d0;
+  --amber:        #92400e;
+  --amber-bg:     #fffbeb;
+  --amber-bd:     #fde68a;
+  --red:          #b91c1c;
+  --red-bg:       #fff5f5;
+  --red-bd:       #fecaca;
+  --blue-bg:      #eff6ff;
+  --blue-bd:      #bfdbfe;
+  --blue-text:    #1d4ed8;
+  --r-sm:  6px;
+  --r-md:  10px;
+  --r-lg:  14px;
+  --r-xl:  18px;
+  --sh-sm: 0 1px 3px rgba(0,0,0,0.05), 0 0 0 1px rgba(0,0,0,0.06);
+  --sh-md: 0 4px 16px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.06);
+  --t: 0.18s ease;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--bg);color:var(--text-1);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;padding:0 28px;gap:16px;}
+.nav-brand{font-size:15px;font-weight:600;color:var(--text-1);letter-spacing:-0.4px;text-decoration:none;display:flex;align-items:center;gap:8px;}
+.nav-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
+.nav-sep{flex:1;}
+.nav-pill{font-size:12px;font-weight:500;color:var(--text-2);background:var(--surface-sub);border:1px solid var(--border-mid);border-radius:100px;padding:4px 12px;letter-spacing:-0.1px;}
+
+/* PAGE */
+.page{max-width:960px;margin:0 auto;padding:0 24px;}
+
+/* HERO */
+.hero{padding:52px 0 36px;}
+.hero-chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--accent);background:var(--accent-bg);border-radius:100px;padding:4px 12px;margin-bottom:18px;letter-spacing:-0.1px;}
+.hero h1{font-size:clamp(26px,4vw,40px);font-weight:600;letter-spacing:-0.8px;line-height:1.15;color:var(--text-1);margin-bottom:12px;}
+.hero h1 span{color:var(--accent);}
+.hero-sub{font-size:15px;color:var(--text-2);font-weight:400;line-height:1.65;max-width:540px;letter-spacing:-0.15px;}
+
+/* METRICS */
+.metrics{padding:0 0 28px;}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.mc{background:var(--surface);border-radius:var(--r-xl);box-shadow:var(--sh-sm);padding:22px 20px;transition:box-shadow var(--t),transform var(--t);}
+.mc:hover{box-shadow:var(--sh-md);transform:translateY(-1px);}
+.mc-label{font-size:11px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;}
+.mc-val{font-size:34px;font-weight:600;letter-spacing:-1.2px;line-height:1;color:var(--text-1);margin-bottom:4px;}
+.mc-val.blue{color:var(--accent);}
+.mc-val.green{color:var(--green);}
+.mc-sub{font-size:12px;color:var(--text-3);letter-spacing:-0.1px;}
+
+/* CONTROLS */
+.controls{padding:0 0 20px;}
+.controls-row{display:flex;gap:20px;flex-wrap:wrap;align-items:center;}
+.cg{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.cl{font-size:12px;font-weight:500;color:var(--text-3);white-space:nowrap;letter-spacing:-0.1px;}
+/* segmented control — shadcn/ui style */
+.seg{display:inline-flex;background:var(--surface-sub);border:1px solid var(--border-mid);border-radius:var(--r-md);padding:3px;gap:2px;}
+.seg-btn{font-family:var(--font);font-size:12px;font-weight:500;letter-spacing:-0.15px;padding:5px 13px;border-radius:var(--r-sm);border:none;background:transparent;color:var(--text-2);cursor:pointer;transition:all var(--t);white-space:nowrap;}
+.seg-btn:hover{color:var(--text-1);}
+.seg-btn.active{background:var(--surface);color:var(--text-1);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,0.1),0 0 0 0.5px rgba(0,0,0,0.08);}
+
+/* LEGEND */
+.legend{display:flex;gap:20px;flex-wrap:wrap;padding:0 0 16px;font-size:12px;color:var(--text-2);align-items:center;letter-spacing:-0.1px;}
+.li{display:flex;align-items:center;gap:6px;}
+.ld{width:7px;height:7px;border-radius:50%;}
+
+/* TABLE CARD */
+.table-card{background:var(--surface);border-radius:var(--r-xl);box-shadow:var(--sh-sm);overflow:hidden;margin-bottom:32px;}
+.table-head{display:grid;grid-template-columns:1fr 96px 180px 180px;padding:11px 20px;border-bottom:1px solid var(--border);background:var(--surface-sub);}
+.th{font-size:11px;font-weight:600;color:var(--text-3);letter-spacing:0.05em;text-transform:uppercase;}
+.th.c{text-align:center;}
+
+/* ROWS */
+.row-wrap{border-bottom:1px solid var(--border);}
+.row-wrap:last-child{border-bottom:none;}
+.row{display:grid;grid-template-columns:1fr 96px 180px 180px;padding:15px 20px;cursor:pointer;transition:background var(--t);align-items:center;user-select:none;}
+.row:hover{background:var(--surface-sub);}
+.row-num{font-size:11px;font-weight:500;color:var(--text-3);letter-spacing:-0.1px;margin-bottom:3px;}
+.row-title{font-size:13px;font-weight:500;color:var(--text-1);line-height:1.45;letter-spacing:-0.2px;display:flex;align-items:flex-start;gap:6px;}
+.chev{flex-shrink:0;width:16px;height:16px;margin-top:1px;color:var(--text-3);transition:transform var(--t);display:flex;align-items:center;justify-content:center;}
+.chev svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.row.open .chev{transform:rotate(90deg);}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;font-size:11px;font-weight:500;padding:3px 9px;border-radius:100px;border:1px solid transparent;letter-spacing:-0.1px;white-space:nowrap;}
+.bc{display:flex;justify-content:center;}
+.b-critica{background:var(--red-bg);color:var(--red);border-color:var(--red-bd);}
+.b-alta{background:var(--amber-bg);color:var(--amber);border-color:var(--amber-bd);}
+.b-media{background:var(--blue-bg);color:var(--blue-text);border-color:var(--blue-bd);}
+.b-baja{background:var(--green-bg);color:var(--green);border-color:var(--green-bd);}
+
+/* FEAS */
+.fw{display:flex;flex-direction:column;align-items:center;gap:3px;}
+.fp{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:4px 10px;border-radius:100px;border:1px solid transparent;letter-spacing:-0.1px;}
+.fd{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.f-si{background:var(--green-bg);color:var(--green);border-color:var(--green-bd);}
+.f-si .fd{background:var(--green);}
+.f-parcial{background:var(--amber-bg);color:var(--amber);border-color:var(--amber-bd);}
+.f-parcial .fd{background:#f59e0b;}
+.f-no{background:var(--red-bg);color:var(--red);border-color:var(--red-bd);}
+.f-no .fd{background:var(--red);}
+.ft{font-size:11px;color:var(--text-3);letter-spacing:-0.1px;}
+
+/* EXPAND */
+.expand{display:none;}
+.expand.open{display:block;animation:ei 0.2s ease;}
+@keyframes ei{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:translateY(0);}}
+.expand-inner{padding:4px 20px 20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.pd{border-radius:var(--r-lg);border:1px solid var(--border);padding:16px 18px;background:var(--surface-sub);}
+.pd.su{border-top:2px solid #93c5fd;}
+.pd.nu{border-top:2px solid #6ee7b7;}
+.pd-top{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.pd-chip{font-size:10px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 8px;border-radius:4px;}
+.pd-chip.su{background:var(--blue-bg);color:var(--blue-text);}
+.pd-chip.nu{background:var(--green-bg);color:var(--green);}
+.pd-name{font-size:13px;font-weight:500;color:var(--text-1);letter-spacing:-0.2px;}
+.pd-row{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--text-2);margin-bottom:7px;line-height:1.55;letter-spacing:-0.1px;}
+.pd-row:last-child{margin-bottom:0;}
+.pd-ic{flex-shrink:0;color:var(--text-3);width:14px;text-align:center;font-size:11px;margin-top:1px;}
+.pd-row b{font-weight:500;color:var(--text-1);}
+
+/* EMPTY */
+.empty{padding:56px 20px;text-align:center;font-size:14px;color:var(--text-3);}
+
+/* FOOTER */
+footer{padding:28px 0 48px;text-align:center;font-size:12px;color:var(--text-3);letter-spacing:-0.1px;}
+footer strong{color:var(--text-2);font-weight:500;}
+
+/* RESPONSIVE */
+@media(max-width:720px){
+  .metrics-grid{grid-template-columns:repeat(2,1fr);}
+  .table-head{display:none;}
+  .row{grid-template-columns:1fr;gap:8px;}
+  .fw{align-items:flex-start;}
+  .bc{justify-content:flex-start;}
+  .expand-inner{grid-template-columns:1fr;}
+  .controls-row{gap:12px;}
+}
+@media(max-width:480px){
+  .metrics-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
+  .hero h1{font-size:24px;}
+  nav,.page{padding-left:16px;padding-right:16px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#"><span class="nav-dot"></span>Mappli</a>
+  <div class="nav-sep"></div>
+  <span class="nav-pill">Plan de trabajo 2026</span>
+</nav>
+
+<div class="page">
+  <div class="hero">
+    <div class="hero-chip">Análisis comparativo</div>
+    <h1>Su plataforma<br>vs. <span>Plataforma Mappli</span></h1>
+    <p class="hero-sub">Evaluación de viabilidad, alcance técnico y tiempos estimados para cada requerimiento del plan de trabajo 2026 — comparando la plataforma actual contra nuestra solución.</p>
+  </div>
+
+  <div class="metrics">
+    <div class="metrics-grid" id="metrics-grid"></div>
+  </div>
+
+  <div class="controls">
+    <div class="controls-row">
+      <div class="cg">
+        <span class="cl">Prioridad</span>
+        <div class="seg">
+          <button class="seg-btn active" data-filter="prioridad" data-val="TODAS"   onclick="sf('prioridad','TODAS',this)">Todas</button>
+          <button class="seg-btn"        data-filter="prioridad" data-val="CRITICA" onclick="sf('prioridad','CRITICA',this)">Crítica</button>
+          <button class="seg-btn"        data-filter="prioridad" data-val="ALTA"    onclick="sf('prioridad','ALTA',this)">Alta</button>
+          <button class="seg-btn"        data-filter="prioridad" data-val="MEDIA"   onclick="sf('prioridad','MEDIA',this)">Media</button>
+          <button class="seg-btn"        data-filter="prioridad" data-val="BAJA"    onclick="sf('prioridad','BAJA',this)">Baja</button>
+        </div>
+      </div>
+      <div class="cg">
+        <span class="cl">Mappli resuelve</span>
+        <div class="seg">
+          <button class="seg-btn active" data-filter="viabilidad" data-val="TODAS"   onclick="sf('viabilidad','TODAS',this)">Todas</button>
+          <button class="seg-btn"        data-filter="viabilidad" data-val="Sí"      onclick="sf('viabilidad','Sí',this)">Sí</button>
+          <button class="seg-btn"        data-filter="viabilidad" data-val="Parcial" onclick="sf('viabilidad','Parcial',this)">Parcial</button>
+          <button class="seg-btn"        data-filter="viabilidad" data-val="No"      onclick="sf('viabilidad','No',this)">No aplica</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="li"><div class="ld" style="background:var(--green)"></div>Sí — puede resolverse</div>
+    <div class="li"><div class="ld" style="background:#f59e0b"></div>Parcial — con limitaciones</div>
+    <div class="li"><div class="ld" style="background:var(--red)"></div>No aplica — fuera de alcance</div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-head">
+      <div class="th">Requerimiento</div>
+      <div class="th c">Prioridad</div>
+      <div class="th c">Su plataforma</div>
+      <div class="th c">Plataforma Mappli</div>
+    </div>
+    <div id="cards"></div>
+  </div>
+</div>
+
+<footer>Elaborado por <strong>Mappli</strong> · Plan de trabajo 2026 · Documento confidencial</footer>
+
+<script>
+const DATA=[
+  {id:1,  no:1,  cat:"Bugs / Analítica",         t:"Corregir filtros de gráficas que no filtran correctamente por equipo",                                           p:"CRITICA",su:{v:"Sí",      a:"Corrección de lógica del dashboard existente",                                             e:"1–2 sem"},  nu:{v:"Sí",      a:"Dashboard analítico con filtros avanzados nativos desde el diseño",                       e:"1 sem"}},
+  {id:2,  no:2,  cat:"Analítica / Reportes",      t:"Descargar informes generales y reportes detallados en Excel",                                                    p:"CRITICA",su:{v:"Sí",      a:"Exportación de reportes en plataforma actual (en progreso)",                               e:"1–2 sem"},  nu:{v:"Sí",      a:"Módulo de reportes con exportación automática Excel/PDF",                                 e:"1 sem"}},
+  {id:3,  no:3,  cat:"Nueva funcionalidad",       t:"Multi idioma en la plataforma",                                                                                  p:"CRITICA",su:{v:"Sí",      a:"Ya implementado en plataforma actual",                                                     e:"Listo"},    nu:{v:"Sí",      a:"Soporte multilenguaje con i18n nativo",                                                   e:"Listo"}},
+  {id:4,  no:6,  cat:"Bugs / Acceso",             t:"Usuarios nuevos deben ver contenido sin ser asignados a grupo primero",                                          p:"CRITICA",su:{v:"Sí",      a:"Corrección de flujo de registro y asignación automática de grupo base",                    e:"1–2 sem"},  nu:{v:"Sí",      a:"Flujo de onboarding rediseñado con acceso a contenido inmediato",                        e:"3–5 días"}},
+  {id:5,  no:12, cat:"Performance",               t:"Optimizar carga del avatar con mala conexión (actualmente hasta 7 min)",                                         p:"CRITICA",su:{v:"Parcial", a:"Optimización de assets del avatar con compresión y CDN",                                  e:"2–3 sem"},  nu:{v:"Sí",      a:"Avatar optimizado con lazy loading, CDN global y fallback progresivo",                    e:"1 sem"}},
+  {id:6,  no:13, cat:"Performance",               t:"Optimizar carga del informe y avatar mentor (actualmente hasta 5 min)",                                          p:"CRITICA",su:{v:"Parcial", a:"Revisión de tiempos de transcripción y AI; implementación de caché",                     e:"2–3 sem"},  nu:{v:"Sí",      a:"Pipeline AI optimizado con respuestas en streaming y caché inteligente",                 e:"1 sem"}},
+  {id:7,  no:14, cat:"IA / Prompt",               t:"Ajustar prompt del mentor para feedback menos condescendiente y más equilibrado",                                p:"CRITICA",su:{v:"Sí",      a:"Optimización de system prompt con guías de tono y estilo",                                e:"3–5 días"}, nu:{v:"Sí",      a:"Prompt engineering avanzado + evaluación automatizada de calidad de sesiones",           e:"2–3 días"}},
+  {id:8,  no:15, cat:"IA / Voz",                  t:"Ajustar acento del mentor a neutro según proyecto y usuario",                                                    p:"CRITICA",su:{v:"Parcial", a:"Integración con ElevenLabs para selección de voz; requiere configuración por proyecto",    e:"1–2 sem"},  nu:{v:"Sí",      a:"ElevenLabs integrado nativamente con selección de voz por proyecto",                     e:"3–5 días"}},
+  {id:9,  no:17, cat:"Nueva funcionalidad",       t:"Auto guardado de sesión para retomar si hay desconexión de internet",                                            p:"CRITICA",su:{v:"Parcial", a:"Resumen de conversación cada 3 min como memoria; requiere nuevo backend",                e:"2–3 sem"},  nu:{v:"Sí",      a:"Checkpoint de sesión con resumen AI cada 3 min y restauración automática",               e:"1 sem"}},
+  {id:10, no:22, cat:"Nueva funcionalidad",       t:"Recordatorio inteligente: ver disponibilidad en agenda y sugerir sesiones al usuario",                           p:"CRITICA",su:{v:"No",      a:"Requiere integración Outlook/Google Calendar + agente notificador — fuera del scope",     e:"4–6 sem"},  nu:{v:"Sí",      a:"Agente de calendario (Google/Outlook) + notificación por email o WhatsApp",               e:"2 sem"}},
+  {id:11, no:28, cat:"Nueva funcionalidad",       t:"Niveles de casos adaptivos tipo Duolingo: repetir si el resultado no fue satisfactorio",                         p:"CRITICA",su:{v:"No",      a:"Requiere sistema de scoring, lógica de progresión y refactoring mayor de la BD",          e:"6–8 sem"},  nu:{v:"Sí",      a:"Motor de progresión con puntuación en BD y roadmap de casos adaptativo",                 e:"2–3 sem"}},
+  {id:12, no:29, cat:"Nueva funcionalidad",       t:"Sistema para que participantes evalúen la plataforma (reviews y rating)",                                        p:"CRITICA",su:{v:"Parcial", a:"Formulario de reviews; requiere nueva tabla en BD e integración con UI",                 e:"1–2 sem"},  nu:{v:"Sí",      a:"Sistema de reviews y rating con dashboard de satisfacción integrado",                   e:"3–5 días"}},
+  {id:13, no:30, cat:"Nueva funcionalidad",       t:"Avatar que solo escuche al participante, no al ruido de fondo",                                                  p:"CRITICA",su:{v:"Parcial", a:"Implementar rnnoise para aislamiento de voz; requiere pruebas extensas",                e:"2–3 sem"},  nu:{v:"Sí",      a:"Filtro de ruido con rnnoise + VAD integrado en el pipeline de audio",                   e:"1–2 sem"}},
+  {id:14, no:31, cat:"Prueba / Infraestructura",  t:"Load test de la plataforma bajo carga real de usuarios simultáneos",                                             p:"CRITICA",su:{v:"Parcial", a:"Configurar herramienta de load testing (k6/Locust) y analizar resultados",             e:"1–2 sem"},  nu:{v:"Sí",      a:"Load test end-to-end con k6 + reporte de bottlenecks y plan de soluciones",             e:"1 sem"}},
+  {id:15, no:4,  cat:"Bugs / Visualización",      t:"Arreglar error donde la gráfica desaparece mientras el mentor está hablando",                                   p:"ALTA",   su:{v:"Sí",      a:"Fix de renderizado: separar capas de avatar y gráfica con z-index y timing",              e:"3–5 días"}, nu:{v:"Sí",      a:"Layouts no conflictivos entre avatar y analítica por diseño",                            e:"2–3 días"}},
+  {id:16, no:5,  cat:"Bugs / Visualización",      t:"Corregir sobreposición de dos avatares en el caso y en el feedback",                                            p:"ALTA",   su:{v:"Sí",      a:"Fix de z-index y lógica de renderizado para una sola instancia activa",                   e:"2–3 días"}, nu:{v:"Sí",      a:"Sistema de renderizado de un solo avatar activo a la vez por diseño",                    e:"1–2 días"}},
+  {id:17, no:7,  cat:"Bugs / Analítica",          t:"Competencias y comportamientos no se visualizan correctamente en las gráficas",                                  p:"ALTA",   su:{v:"Sí",      a:"Corrección del mapeo de datos de BD hacia las gráficas de competencias",                  e:"3–5 días"}, nu:{v:"Sí",      a:"Dashboard analítico con visualización correcta por diseño desde la base",                e:"2–3 días"}},
+  {id:18, no:16, cat:"Infraestructura / Email",   t:"Evitar que correos enviados a organizaciones lleguen a spam",                                                    p:"ALTA",   su:{v:"Parcial", a:"Configurar SPF, DKIM, DMARC + migrar a dominio verificado (SendGrid/SES)",              e:"1–2 sem"},  nu:{v:"Sí",      a:"Infraestructura de email con dominio verificado + onboarding de empresa incluido",       e:"3–5 días"}},
+  {id:19, no:19, cat:"Gestión de usuarios",       t:"Permitir que un usuario pertenezca a varios grupos sin eliminarlo del anterior",                                  p:"ALTA",   su:{v:"Sí",      a:"Relación many-to-many usuario-grupo en BD; ajuste de lógica y UI",                       e:"1–2 sem"},  nu:{v:"Sí",      a:"Modelo de datos con soporte multi-grupo nativo desde el inicio",                        e:"3–5 días"}},
+  {id:20, no:20, cat:"Gestión de usuarios",       t:"Filtros en sección de grupos: personas sin grupo y buscador por nombre",                                         p:"ALTA",   su:{v:"Sí",      a:"Implementar filtros de BD con UI de búsqueda en la sección de grupos",                   e:"1–2 sem"},  nu:{v:"Sí",      a:"Panel de usuarios con filtros avanzados y búsqueda en tiempo real",                     e:"3–5 días"}},
+  {id:21, no:24, cat:"Nueva funcionalidad",       t:"Sistema de tickets de soporte integrado en la plataforma",                                                       p:"ALTA",   su:{v:"Parcial", a:"Integración con Jira o HubSpot; requiere configuración y gestión de accesos externos",  e:"2–3 sem"},  nu:{v:"Sí",      a:"Agente AI de soporte + integración Jira/HubSpot o sistema de ticketing propio",         e:"1–2 sem"}},
+  {id:22, no:25, cat:"Costos / Operaciones",      t:"Calcular cuánto cuesta la plataforma por usuario activo (unit economics)",                                       p:"ALTA",   su:{v:"Parcial", a:"Análisis manual de logs + cálculo de tokens por sesión; dashboard básico",             e:"1–2 sem"},  nu:{v:"Sí",      a:"Dashboard de unit economics: costo por usuario, sesión y proyecto en tiempo real",       e:"1 sem"}},
+  {id:23, no:26, cat:"Nueva funcionalidad",       t:"Restricción de acceso por tiempo y número de sesiones completadas",                                              p:"ALTA",   su:{v:"Parcial", a:"Lógica de autorización por pase; requiere cambios en sistema de auth y BD",              e:"2–3 sem"},  nu:{v:"Sí",      a:"Control de acceso por proyecto: tiempo, sesiones y usuarios configurables desde admin",   e:"1 sem"}},
+  {id:24, no:8,  cat:"Bugs / Grabación",          t:"Grabar también el video o cara del participante además de la voz",                                               p:"MEDIA",  su:{v:"Parcial", a:"Integración WebRTC para captura de video al iniciar el chat de sesión",                 e:"2–3 sem"},  nu:{v:"Sí",      a:"Grabación de video y audio activada automáticamente al iniciar sesión",                 e:"Incluido"}},
+  {id:25, no:10, cat:"UX / Diseño",               t:"Mejorar diseño visual para que se perciba más premium y menos plano",                                            p:"MEDIA",  su:{v:"Parcial", a:"Refactoring visual parcial limitado por el tech stack existente",                      e:"4–6 sem"},  nu:{v:"Sí",      a:"UI premium por diseño con identidad visual personalizada del cliente",                   e:"Incluido"}},
+  {id:26, no:11, cat:"Nueva funcionalidad",       t:"Sección para subir recursos del cliente (PDFs, manuales, infografías) por proyecto",                            p:"MEDIA",  su:{v:"Parcial", a:"Upload de archivos a storage; requiere asociación a proyecto y comportamientos en BD",e:"2–3 sem"},  nu:{v:"Sí",      a:"Sección de Recursos nativa con asociación a proyecto y comportamientos específicos",     e:"Incluido"}},
+  {id:27, no:27, cat:"Nueva funcionalidad",       t:"Animaciones idle del avatar cuando no está hablando",                                                            p:"MEDIA",  su:{v:"Parcial", a:"Requiere videos idle de 15 seg por avatar; animación personalizada por modelo",        e:"2–3 sem"},  nu:{v:"Sí",      a:"Idle animations integradas en el motor de avatar custom de la plataforma",               e:"1–2 sem"}},
+  {id:28, no:9,  cat:"UX / Diseño",               t:"Evolucionar diseño físico de avatares (actualmente desactualizados)",                                            p:"BAJA",   su:{v:"No",      a:"Rediseño completo de modelos 3D; requiere artista externo especializado y largo plazo",   e:"8–12 sem"}, nu:{v:"Sí",      a:"Avatares custom con identidad visual actualizada incluidos en la plataforma Mappli",      e:"2–3 sem"}},
+  {id:29, no:18, cat:"Analítica / IA",            t:"Módulo de IA que analice el estado de cada proyecto con indicadores clave",                                      p:"BAJA",   su:{v:"No",      a:"Requiere agente de análisis de BD + integración al dashboard — desarrollo largo plazo",   e:"6–10 sem"}, nu:{v:"Sí",      a:"Agente de análisis de proyectos con indicadores KPI y alertas automatizadas",             e:"2–3 sem"}},
+  {id:30, no:21, cat:"Nueva funcionalidad",       t:"Avatar bot con IA para resolver dudas o problemas inmediatos dentro de la plataforma",                          p:"BAJA",   su:{v:"No",      a:"Requiere agente de soporte independiente + integración completa al UI existente",       e:"4–6 sem"},  nu:{v:"Sí",      a:"Agente AI de soporte 24/7 integrado con chatbot y handoff a agente humano",              e:"1–2 sem"}}
+];
+
+let F={p:'TODAS',v:'TODAS'}, openId=null;
+const CV=`<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>`;
+
+function fp(v,e){
+  const c=v==='Sí'?'f-si':v==='Parcial'?'f-parcial':'f-no';
+  const l=v==='Sí'?'Sí':v==='Parcial'?'Parcial':'No aplica';
+  return `<div class="fw"><span class="fp ${c}"><span class="fd"></span>${l}</span><span class="ft">${e}</span></div>`;
+}
+function bdg(p){
+  const m={CRITICA:['b-critica','Crítica'],ALTA:['b-alta','Alta'],MEDIA:['b-media','Media'],BAJA:['b-baja','Baja']};
+  return `<div class="bc"><span class="badge ${m[p][0]}">${m[p][1]}</span></div>`;
+}
+function pdc(v){return v==='Sí'?'var(--green)':v==='Parcial'?'#f59e0b':'var(--red)';}
+function pdi(v){return v==='Sí'?'✓':v==='Parcial'?'~':'✗';}
+
+function renderM(d){
+  const cr=d.filter(i=>i.p==='CRITICA').length, n=d.length||1;
+  const ns=d.filter(i=>i.nu.v==='Sí').length, ss=d.filter(i=>i.su.v==='Sí').length;
+  const vt=d.filter(i=>i.nu.v==='Sí'&&i.su.v!=='Sí').length;
+  document.getElementById('metrics-grid').innerHTML=`
+    <div class="mc"><div class="mc-label">Total</div><div class="mc-val">${d.length}</div><div class="mc-sub">${cr} de prioridad crítica</div></div>
+    <div class="mc"><div class="mc-label">Su plataforma</div><div class="mc-val">${ss}</div><div class="mc-sub">${Math.round(ss/n*100)}% de resolución</div></div>
+    <div class="mc"><div class="mc-label">Plataforma Mappli</div><div class="mc-val green">${ns}</div><div class="mc-sub">${Math.round(ns/n*100)}% de resolución</div></div>
+    <div class="mc"><div class="mc-label">Ventaja exclusiva</div><div class="mc-val blue">+${vt}</div><div class="mc-sub">ítems que solo Mappli resuelve</div></div>`;
+}
+
+function renderC(d){
+  const c=document.getElementById('cards');
+  if(!d.length){c.innerHTML='<div class="empty">Sin resultados para los filtros seleccionados.</div>';return;}
+  c.innerHTML=d.map(i=>`
+    <div class="row-wrap" id="rw-${i.id}">
+      <div class="row" id="r-${i.id}" onclick="tog(${i.id})">
+        <div>
+          <div class="row-num">${String(i.no).padStart(2,'0')} · ${i.cat}</div>
+          <div class="row-title"><span class="chev">${CV}</span>${i.t}</div>
+        </div>
+        ${bdg(i.p)}
+        ${fp(i.su.v,i.su.e)}
+        ${fp(i.nu.v,i.nu.e)}
+      </div>
+      <div class="expand" id="ex-${i.id}">
+        <div class="expand-inner">
+          <div class="pd su">
+            <div class="pd-top"><span class="pd-chip su">Su plataforma</span><span class="pd-name">Plataforma actual</span></div>
+            <div class="pd-row"><span class="pd-ic" style="color:${pdc(i.su.v)}">${pdi(i.su.v)}</span><span><b>Viabilidad:</b> ${i.su.v}</span></div>
+            <div class="pd-row"><span class="pd-ic">→</span><span><b>Qué se haría:</b> ${i.su.a}</span></div>
+            <div class="pd-row"><span class="pd-ic">⏱</span><span><b>Tiempo:</b> ${i.su.e}</span></div>
+          </div>
+          <div class="pd nu">
+            <div class="pd-top"><span class="pd-chip nu">Mappli</span><span class="pd-name">Plataforma propuesta</span></div>
+            <div class="pd-row"><span class="pd-ic" style="color:${pdc(i.nu.v)}">${pdi(i.nu.v)}</span><span><b>Viabilidad:</b> ${i.nu.v}</span></div>
+            <div class="pd-row"><span class="pd-ic">→</span><span><b>Qué haríamos:</b> ${i.nu.a}</span></div>
+            <div class="pd-row"><span class="pd-ic">⏱</span><span><b>Tiempo:</b> ${i.nu.e}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function tog(id){
+  const ex=document.getElementById(`ex-${id}`), r=document.getElementById(`r-${id}`);
+  if(openId===id){ex.classList.remove('open');r.classList.remove('open');openId=null;}
+  else{
+    if(openId){document.getElementById(`ex-${openId}`)?.classList.remove('open');document.getElementById(`r-${openId}`)?.classList.remove('open');}
+    ex.classList.add('open');r.classList.add('open');openId=id;
+  }
+}
+
+function sf(type,val,btn){
+  F[type==='prioridad'?'p':'v']=val;
+  document.querySelectorAll(`[data-filter="${type}"]`).forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  run();
+}
+
+function run(){
+  let d=DATA;
+  if(F.p!=='TODAS') d=d.filter(i=>i.p===F.p);
+  if(F.v!=='TODAS') d=d.filter(i=>i.nu.v===F.v);
+  openId=null; renderM(d); renderC(d);
+}
+
+run();
+</script>
+</body>
+</html>
