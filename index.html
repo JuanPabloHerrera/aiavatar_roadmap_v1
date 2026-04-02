@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Comparativo de Soluciones — Plan de Trabajo 2026</title>
+<title>Roadmap 2026 — Desarrollo Actual vs. Plataforma Mappli</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -172,14 +172,14 @@ footer strong{color:var(--text-2);font-weight:500;}
 <nav>
   <a class="nav-brand" href="#"><span class="nav-dot"></span>Mappli</a>
   <div class="nav-sep"></div>
-  <span class="nav-pill">Plan de trabajo 2026</span>
+  <span class="nav-pill">Roadmap de desarrollo 2026</span>
 </nav>
 
 <div class="page">
   <div class="hero">
-    <div class="hero-chip">Análisis comparativo</div>
-    <h1>Su plataforma<br>vs. <span>Plataforma Mappli</span></h1>
-    <p class="hero-sub">Evaluación de viabilidad, alcance técnico y tiempos estimados para cada requerimiento del plan de trabajo 2026 — comparando la plataforma actual contra nuestra solución.</p>
+    <div class="hero-chip">Comparativa de desarrollo · 2026</div>
+    <h1>Desarrollo actual<br>vs. <span>Plataforma Mappli</span></h1>
+    <p class="hero-sub">Comparativa técnica entre continuar el desarrollo sobre la plataforma actual y migrar a la Plataforma Mappli — evaluando viabilidad, alcance y tiempos estimados para cada requerimiento del roadmap 2026.</p>
   </div>
 
   <div class="metrics">
@@ -211,23 +211,23 @@ footer strong{color:var(--text-2);font-weight:500;}
   </div>
 
   <div class="legend">
-    <div class="li"><div class="ld" style="background:var(--green)"></div>Sí — puede resolverse</div>
+    <div class="li"><div class="ld" style="background:var(--green)"></div>Sí — resuelto con esta opción</div>
     <div class="li"><div class="ld" style="background:#f59e0b"></div>Parcial — con limitaciones</div>
-    <div class="li"><div class="ld" style="background:var(--red)"></div>No aplica — fuera de alcance</div>
+    <div class="li"><div class="ld" style="background:var(--red)"></div>No — fuera de alcance actual</div>
   </div>
 
   <div class="table-card">
     <div class="table-head">
       <div class="th">Requerimiento</div>
       <div class="th c">Prioridad</div>
-      <div class="th c">Su plataforma</div>
+      <div class="th c">Desarrollo actual</div>
       <div class="th c">Plataforma Mappli</div>
     </div>
     <div id="cards"></div>
   </div>
 </div>
 
-<footer>Elaborado por <strong>Mappli</strong> · Plan de trabajo 2026 · Documento confidencial</footer>
+<footer>Elaborado por <strong>Mappli</strong> · Roadmap de desarrollo 2026 · Documento confidencial</footer>
 
 <script>
 const DATA=[
@@ -284,7 +284,7 @@ function renderM(d){
   const vt=d.filter(i=>i.nu.v==='Sí'&&i.su.v!=='Sí').length;
   document.getElementById('metrics-grid').innerHTML=`
     <div class="mc"><div class="mc-label">Total</div><div class="mc-val">${d.length}</div><div class="mc-sub">${cr} de prioridad crítica</div></div>
-    <div class="mc"><div class="mc-label">Su plataforma</div><div class="mc-val">${ss}</div><div class="mc-sub">${Math.round(ss/n*100)}% de resolución</div></div>
+    <div class="mc"><div class="mc-label">Desarrollo actual</div><div class="mc-val">${ss}</div><div class="mc-sub">${Math.round(ss/n*100)}% de resolución</div></div>
     <div class="mc"><div class="mc-label">Plataforma Mappli</div><div class="mc-val green">${ns}</div><div class="mc-sub">${Math.round(ns/n*100)}% de resolución</div></div>
     <div class="mc"><div class="mc-label">Ventaja exclusiva</div><div class="mc-val blue">+${vt}</div><div class="mc-sub">ítems que solo Mappli resuelve</div></div>`;
 }
@@ -306,13 +306,13 @@ function renderC(d){
       <div class="expand" id="ex-${i.id}">
         <div class="expand-inner">
           <div class="pd su">
-            <div class="pd-top"><span class="pd-chip su">Su plataforma</span><span class="pd-name">Plataforma actual</span></div>
+            <div class="pd-top"><span class="pd-chip su">Desarrollo actual</span><span class="pd-name">Plataforma existente</span></div>
             <div class="pd-row"><span class="pd-ic" style="color:${pdc(i.su.v)}">${pdi(i.su.v)}</span><span><b>Viabilidad:</b> ${i.su.v}</span></div>
             <div class="pd-row"><span class="pd-ic">→</span><span><b>Qué se haría:</b> ${i.su.a}</span></div>
             <div class="pd-row"><span class="pd-ic">⏱</span><span><b>Tiempo:</b> ${i.su.e}</span></div>
           </div>
           <div class="pd nu">
-            <div class="pd-top"><span class="pd-chip nu">Mappli</span><span class="pd-name">Plataforma propuesta</span></div>
+            <div class="pd-top"><span class="pd-chip nu">Mappli</span><span class="pd-name">Plataforma Mappli</span></div>
             <div class="pd-row"><span class="pd-ic" style="color:${pdc(i.nu.v)}">${pdi(i.nu.v)}</span><span><b>Viabilidad:</b> ${i.nu.v}</span></div>
             <div class="pd-row"><span class="pd-ic">→</span><span><b>Qué haríamos:</b> ${i.nu.a}</span></div>
             <div class="pd-row"><span class="pd-ic">⏱</span><span><b>Tiempo:</b> ${i.nu.e}</span></div>
