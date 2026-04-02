@@ -350,43 +350,57 @@ function fmtTime(weeks){
   const ml=m<0.5?'< 1 mes':m<1?'~1 mes':m<2?'~'+Math.round(m*2)/2+' meses':'~'+Math.round(m)+' meses';
   return {weeks:w, months:ml, label:wLabel+' sem · '+ml};
 }
+const SU_PROFILES=[["Dev Sr Backend", 606], ["Dev Sr Frontend", 416], ["Dev Sr Unity/WebGL", 272], ["QA Engineer Sr", 262], ["DevOps/Cloud", 192], ["AI/ML Engineer Sr", 172], ["Dev Sr Fullstack", 130], ["Diseñador 3D Sr", 200], ["UX/UI Designer Sr", 124], ["Arquitecto de Software", 120], ["PM / Tech Lead", 144]];
+const NU_PROFILES=[["Dev Sr Backend", 570], ["AI/ML Engineer Sr", 252], ["Dev Sr Frontend", 218], ["QA Engineer Sr", 180], ["UX/UI Designer Sr", 148], ["Arquitecto de Software", 120], ["PM / Tech Lead", 108]];
+const SU_TOTAL=2638;
+const NU_TOTAL=1596;
+function makeProfileRows(profiles,total,cls){
+  return profiles.map(([name,hrs])=>{
+    const pct=Math.round(hrs/total*100);
+    return `<div class="prof-row"><span class="prof-name">${name}</span><div class="prof-bar-wrap"><div class="prof-bar ${cls}" style="width:${pct}%"></div></div><span class="prof-hrs">${hrs} hrs</span></div>`;
+  }).join("");
+}
 function renderM(d){
   const n=d.length||1,total=d.length;
-  const pc=d.filter(i=>i.p==='CRITICA').length;
-  const pa=d.filter(i=>i.p==='ALTA').length;
-  const pm=d.filter(i=>i.p==='MEDIA').length;
-  const pb=d.filter(i=>i.p==='BAJA').length;
-  const cA=d.filter(i=>i.c==='Alto').length;
-  const cM=d.filter(i=>i.c==='Medio').length;
-  const cB=d.filter(i=>i.c==='Bajo').length;
+  const pc=d.filter(i=>i.p==="CRITICA").length;
+  const pa=d.filter(i=>i.p==="ALTA").length;
+  const pm=d.filter(i=>i.p==="MEDIA").length;
+  const pb=d.filter(i=>i.p==="BAJA").length;
+  const cA=d.filter(i=>i.c==="Alto").length;
+  const cM=d.filter(i=>i.c==="Medio").length;
+  const cB=d.filter(i=>i.c==="Bajo").length;
   const suH=Math.round(d.reduce((a,i)=>a+parseWeeks(i.su.e),0));
   const nuH=Math.round(d.reduce((a,i)=>a+parseWeeks(i.nu.e),0));
-  function bar(v,t,col){const p=t?Math.round(v/t*100):0;return '<div class="via-bar-wrap"><div class="via-bar" style="width:'+p+'%;background:'+col+'"></div></div>';}
-  document.getElementById('metrics-grid').innerHTML=
-    '<div class="mc"><div class="mc-label">Tareas por prioridad</div><div class="via-rows">'+
-      '<div class="via-row"><div class="via-dot" style="background:var(--red)"></div><span class="via-name">Crítica</span>'+bar(pc,total,'var(--red)')+'<span class="via-count" style="color:var(--red)">'+pc+'</span></div>'+
-      '<div class="via-row"><div class="via-dot" style="background:#f59e0b"></div><span class="via-name">Alta</span>'+bar(pa,total,'#f59e0b')+'<span class="via-count" style="color:var(--amber)">'+pa+'</span></div>'+
-      '<div class="via-row"><div class="via-dot" style="background:var(--blue-text)"></div><span class="via-name">Media</span>'+bar(pm,total,'var(--blue-text)')+'<span class="via-count" style="color:var(--blue-text)">'+pm+'</span></div>'+
-      '<div class="via-row"><div class="via-dot" style="background:var(--green)"></div><span class="via-name">Baja</span>'+bar(pb,total,'var(--green)')+'<span class="via-count" style="color:var(--green)">'+pb+'</span></div>'+
-    '</div></div>'+
-    '<div class="mc"><div class="mc-label">Complejidad de las tareas</div><div class="via-rows">'+
-      '<div class="via-row"><div class="via-dot" style="background:var(--red)"></div><span class="via-name">Alta</span>'+bar(cA,total,'var(--red)')+'<span class="via-count" style="color:var(--red)">'+cA+'</span></div>'+
-      '<div class="via-row"><div class="via-dot" style="background:#f59e0b"></div><span class="via-name">Media</span>'+bar(cM,total,'#f59e0b')+'<span class="via-count" style="color:var(--amber)">'+cM+'</span></div>'+
-      '<div class="via-row"><div class="via-dot" style="background:var(--green)"></div><span class="via-name">Baja</span>'+bar(cB,total,'var(--green)')+'<span class="via-count" style="color:var(--green)">'+cB+'</span></div>'+
-    '</div></div>'+
-    '<div class="mc"><div class="mc-label">Horas — Desarrollo actual</div>'+
-      '<div class="mc-time-main su-col">'+suH+' <span style="font-size:16px;font-weight:500;color:var(--text-3)">hrs</span></div>'+
-      '<div class="mc-time-sub">horas de trabajo efectivo</div>'+
-      '<span class="mc-time-badge su-badge">'+total+' requerimientos</span>'+
-    '</div>'+
-    '<div class="mc"><div class="mc-label">Horas — Desarrollo Mappli</div>'+
-      '<div class="mc-time-main nu-col">'+nuH+' <span style="font-size:16px;font-weight:500;color:var(--text-3)">hrs</span></div>'+
-      '<div class="mc-time-sub">horas de trabajo efectivo</div>'+
-      '<span class="mc-time-badge nu-badge">'+total+' tareas cubiertas</span>'+
-    '</div>';
-  document.getElementById('profiles-grid').innerHTML=
-    '<div class="mc"><div class="mc-label">Perfiles — Desarrollo actual <span class="mc-time-badge su-badge">2638 hrs totales</span></div><div class="prof-rows"><div class=\"prof-row\"><span class=\"prof-name\">Dev Sr Backend</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar su-bar\" style=\"width:23%\"></div></div><span class=\"prof-hrs\">606 hrs</span></div><div class=\"prof-row\"><span class=\"prof-name\">Dev Sr Frontend</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar su-bar\" style=\"width:16%\"></div></div><span class=\"prof-hrs\">416 hrs</span></div><div class=\"prof-row\"><span class=\"prof-name\">Dev Sr Unity/WebGL</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar su-bar\" style=\"width:10%\"></div></div><span class=\"prof-hrs\">272 hrs</span></div><div class=\"prof-row\"><span class=\"prof-name\">QA Engineer Sr</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar su-bar\" style=\"width:10%\"></div></div><span class=\"prof-hrs\">262 hrs</span></div><div class=\"prof-row\"><span class=\"prof-name\">DevOps/Cloud</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar su-bar\" style=\"width:7%\"></div></div><span class=\"prof-hrs\">192 hrs</span></div><div class=\"prof-row\"><span class=\"prof-name\">AI/ML Engineer Sr</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar su-bar\" style=\"width:7%\"></div></div><span class=\"prof-hrs\">172 hrs</span></div><div class=\"prof-row\"><span class=\"prof-name\">Dev Sr Fullstack</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar su-bar\" style=\"width:5%\"></div></div><span class=\"prof-hrs\">130 hrs</span></div><div class=\"prof-row\"><span class=\"prof-name\">Diseñador 3D Sr</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar su-bar\" style=\"width:8%\"></div></div><span class=\"prof-hrs\">200 hrs</span></div><div class=\"prof-row\"><span class=\"prof-name\">UX/UI Designer Sr</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar su-bar\" style=\"width:5%\"></div></div><span class=\"prof-hrs\">124 hrs</span></div><div class=\"prof-row\"><span class=\"prof-name\">Arquitecto de Software</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar su-bar\" style=\"width:5%\"></div></div><span class=\"prof-hrs\">120 hrs</span></div><div class=\"prof-row\"><span class=\"prof-name\">PM / Tech Lead</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar su-bar\" style=\"width:5%\"></div></div><span class=\"prof-hrs\">144 hrs</span></div></div></div>'+
-    '<div class="mc"><div class="mc-label">Perfiles — Desarrollo Mappli <span class="mc-time-badge nu-badge">1596 hrs totales</span></div><div class="prof-rows"><div class=\"prof-row\"><span class=\"prof-name\">Dev Sr Backend</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar nu-bar\" style=\"width:36%\"></div></div><span class=\"prof-hrs\">570 hrs</span></div><div class=\"prof-row\"><span class=\"prof-name\">AI/ML Engineer Sr</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar nu-bar\" style=\"width:16%\"></div></div><span class=\"prof-hrs\">252 hrs</span></div><div class=\"prof-row\"><span class=\"prof-name\">Dev Sr Frontend</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar nu-bar\" style=\"width:14%\"></div></div><span class=\"prof-hrs\">218 hrs</span></div><div class=\"prof-row\"><span class=\"prof-name\">QA Engineer Sr</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar nu-bar\" style=\"width:11%\"></div></div><span class=\"prof-hrs\">180 hrs</span></div><div class=\"prof-row\"><span class=\"prof-name\">UX/UI Designer Sr</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar nu-bar\" style=\"width:9%\"></div></div><span class=\"prof-hrs\">148 hrs</span></div><div class=\"prof-row\"><span class=\"prof-name\">Arquitecto de Software</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar nu-bar\" style=\"width:8%\"></div></div><span class=\"prof-hrs\">120 hrs</span></div><div class=\"prof-row\"><span class=\"prof-name\">PM / Tech Lead</span><div class=\"prof-bar-wrap\"><div class=\"prof-bar nu-bar\" style=\"width:7%\"></div></div><span class=\"prof-hrs\">108 hrs</span></div></div></div>';
+  function bar(v,t,col){const p=t?Math.round(v/t*100):0;return `<div class="via-bar-wrap"><div class="via-bar" style="width:${p}%;background:${col}"></div></div>`;}
+  document.getElementById("metrics-grid").innerHTML=
+    `<div class="mc"><div class="mc-label">Tareas por prioridad</div><div class="via-rows">
+      <div class="via-row"><div class="via-dot" style="background:var(--red)"></div><span class="via-name">Crítica</span>${bar(pc,total,"var(--red)")}<span class="via-count" style="color:var(--red)">${pc}</span></div>
+      <div class="via-row"><div class="via-dot" style="background:#f59e0b"></div><span class="via-name">Alta</span>${bar(pa,total,"#f59e0b")}<span class="via-count" style="color:var(--amber)">${pa}</span></div>
+      <div class="via-row"><div class="via-dot" style="background:var(--blue-text)"></div><span class="via-name">Media</span>${bar(pm,total,"var(--blue-text)")}<span class="via-count" style="color:var(--blue-text)">${pm}</span></div>
+      <div class="via-row"><div class="via-dot" style="background:var(--green)"></div><span class="via-name">Baja</span>${bar(pb,total,"var(--green)")}<span class="via-count" style="color:var(--green)">${pb}</span></div>
+    </div></div>
+    <div class="mc"><div class="mc-label">Complejidad de las tareas</div><div class="via-rows">
+      <div class="via-row"><div class="via-dot" style="background:var(--red)"></div><span class="via-name">Alta</span>${bar(cA,total,"var(--red)")}<span class="via-count" style="color:var(--red)">${cA}</span></div>
+      <div class="via-row"><div class="via-dot" style="background:#f59e0b"></div><span class="via-name">Media</span>${bar(cM,total,"#f59e0b")}<span class="via-count" style="color:var(--amber)">${cM}</span></div>
+      <div class="via-row"><div class="via-dot" style="background:var(--green)"></div><span class="via-name">Baja</span>${bar(cB,total,"var(--green)")}<span class="via-count" style="color:var(--green)">${cB}</span></div>
+    </div></div>
+    <div class="mc"><div class="mc-label">Horas — Desarrollo actual</div>
+      <div class="mc-time-main su-col">${suH} <span style="font-size:16px;font-weight:500;color:var(--text-3)">hrs</span></div>
+      <div class="mc-time-sub">horas de trabajo efectivo</div>
+      <span class="mc-time-badge su-badge">${total} requerimientos</span>
+    </div>
+    <div class="mc"><div class="mc-label">Horas — Desarrollo Mappli</div>
+      <div class="mc-time-main nu-col">${nuH} <span style="font-size:16px;font-weight:500;color:var(--text-3)">hrs</span></div>
+      <div class="mc-time-sub">horas de trabajo efectivo</div>
+      <span class="mc-time-badge nu-badge">${total} tareas cubiertas</span>
+    </div>`;
+  document.getElementById("profiles-grid").innerHTML=
+    `<div class="mc"><div class="mc-label">Perfiles — Desarrollo actual <span class="mc-time-badge su-badge">${SU_TOTAL} hrs totales</span></div>
+      <div class="prof-rows">${makeProfileRows(SU_PROFILES,SU_TOTAL,"su-bar")}</div>
+    </div>
+    <div class="mc"><div class="mc-label">Perfiles — Desarrollo Mappli <span class="mc-time-badge nu-badge">${NU_TOTAL} hrs totales</span></div>
+      <div class="prof-rows">${makeProfileRows(NU_PROFILES,NU_TOTAL,"nu-bar")}</div>
+    </div>`;
 }
 function renderC(d){
   const c=document.getElementById('cards');
